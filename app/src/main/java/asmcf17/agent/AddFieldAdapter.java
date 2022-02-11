@@ -2,6 +2,7 @@ package asmcf17.agent;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.Type;
 
 import static org.objectweb.asm.Opcodes.ASM4;
 
@@ -29,7 +30,7 @@ public class AddFieldAdapter extends ClassVisitor {
     @Override
     public void visitEnd() {
         if (!isFieldPresent) {
-            FieldVisitor fv = cv.visitField(fAcc, fName, fDesc, null, null);
+            FieldVisitor fv = cv.visitField(fAcc, fName, Type.BOOLEAN_TYPE.toString(), null, null);
             if (fv != null) {
                 fv.visitEnd();
             }
