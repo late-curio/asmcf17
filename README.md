@@ -12,5 +12,6 @@ export JDK17='17-open'
 ```
 
 `./run.sh` - builds and runs with Java 8 and see `aBooleanField` gets added successfully
+
 `./runWithJava17.sh` - builds with Java 8 and runs with Java 17, the field does not appear to be added
 
