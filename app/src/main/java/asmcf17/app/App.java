@@ -3,16 +3,16 @@
  */
 package asmcf17.app;
 
-import asmcf17.app.Simple;
-
 import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
 
 public class App {
     public static void main(String[] args) {
         System.out.println("MAIN");
         Simple simple = new Simple();
         simple.setField("value");
-        Arrays.stream(Simple.class.getDeclaredFields()).forEach((field -> System.out.println(field.getName())));
+        CompletableFuture<Simple> simpleCf = new CompletableFuture();
+        Arrays.stream(CompletableFuture.class.getDeclaredFields()).forEach((field -> System.out.println(field.getName())));
     }
 }
 

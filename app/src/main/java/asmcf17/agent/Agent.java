@@ -15,18 +15,18 @@ public class Agent {
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         System.out.println("PREMAIN");
         instrumentation.addTransformer((loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> {
-            if (className.equals("asmcf17/app/Simple")) {
-                System.out.println(className);
+            //System.out.println(className);
+            if (className.equals("java/util/concurrent/CompletableFuture")) {
                 ClassPrinter printer = new ClassPrinter();
                 ClassReader reader = null;
                 try {
-                    reader = new ClassReader("asmcf17.app.Simple");
+                    reader = new ClassReader("java.util.concurrent.CompletableFuture");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 reader.accept(printer, 0);
 
-                InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("asmcf17/app/Simple.class");
+                InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("java/util/concurrent/CompletableFuture.class");
                 if(is == null) {
 
                     return classfileBuffer;
