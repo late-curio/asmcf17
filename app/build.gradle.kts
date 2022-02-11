@@ -8,6 +8,7 @@
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
+    id("com.github.johnrengelman.shadow") version "7.0.0"
     application
 }
 
@@ -30,7 +31,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("asmcf17.App")
+    mainClass.set("asmcf17.app.App")
 }
 
 tasks.named<Test>("test") {
@@ -38,9 +39,13 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
-val jar by tasks.getting(Jar::class) {
-    manifest {
-        attributes["Main-Class"] = "asmcf17.app.App"
-        attributes["Premain-Class"] = "asmcf17.agent.Agent"
+tasks {
+    shadowJar {
+        manifest {
+            attributes(
+                Pair("Premain-Class", "asmcf17.agent.Agent")
+            )
+        }
     }
 }
+

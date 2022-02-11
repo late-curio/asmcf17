@@ -3,11 +3,12 @@
  */
 package asmcf17.app;
 
-import java.io.IOException;
+import asmcf17.app.Simple;
+
 import java.util.Arrays;
 
 public class App {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         System.out.println("MAIN");
         Simple simple = new Simple();
         simple.setField("value");
