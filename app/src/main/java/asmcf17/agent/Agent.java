@@ -6,7 +6,7 @@ public class Agent {
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         System.out.println("PREMAIN");
         instrumentation.addTransformer((loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> {
-            if (className.startsWith("asmcf17")) {
+            if (className.equals("asmcf17/app/Simple")) {
                 System.out.println(className);
             }
             return classfileBuffer;
