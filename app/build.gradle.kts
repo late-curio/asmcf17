@@ -22,6 +22,10 @@ dependencies {
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:30.1.1-jre")
+
+    implementation("org.ow2.asm:asm:9.2")
+    implementation("org.ow2.asm:asm-commons:9.2")
+    implementation("org.ow2.asm:asm-util:9.2")
 }
 
 application {

@@ -3,12 +3,15 @@
  */
 package asmcf17;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import org.objectweb.asm.ClassReader;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+import java.io.IOException;
+
+public class App {
+    public static void main(String[] args) throws IOException {
+        ClassPrinter printer = new ClassPrinter();
+        ClassReader reader = new ClassReader("java.lang.Runnable");
+        reader.accept(printer, 0);
     }
 }
+
