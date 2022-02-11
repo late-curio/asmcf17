@@ -10,7 +10,7 @@ import java.io.IOException;
 public class App {
     public static void main(String[] args) throws IOException {
         ClassPrinter printer = new ClassPrinter();
-        ClassReader reader = new ClassReader("java.lang.Runnable");
+        ClassReader reader = new ClassReader("java.util.concurrent.CompletableFuture");
         reader.accept(printer, 0);
     }
 }
