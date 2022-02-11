@@ -40,7 +40,7 @@ tasks.named<Test>("test") {
 
 val jar by tasks.getting(Jar::class) {
     manifest {
-        attributes["Main-Class"] = "asmcf17.App"
-        attributes["Premain-Class"] = "asmcf17.Agent"
+        attributes["Main-Class"] = "asmcf17.app.App"
+        attributes["Premain-Class"] = "asmcf17.agent.Agent"
     }
 }

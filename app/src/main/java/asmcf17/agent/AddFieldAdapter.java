@@ -1,4 +1,4 @@
-package asmcf17;
+package asmcf17.agent;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;

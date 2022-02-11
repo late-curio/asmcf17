@@ -1,4 +1,4 @@
-package asmcf17;
+package asmcf17.agent;
 
 import java.lang.instrument.Instrumentation;
 

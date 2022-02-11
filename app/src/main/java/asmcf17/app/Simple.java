@@ -1,4 +1,4 @@
-package asmcf17;
+package asmcf17.app;
 
 public class Simple {
     private String field;

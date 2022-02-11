@@ -3,8 +3,8 @@
  */
 package asmcf17;
 
+import asmcf17.app.App;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
     @Test void appHasAGreeting() {
