@@ -11,7 +11,7 @@ public class App {
         System.out.println("MAIN");
         Simple simple = new Simple();
         simple.setField("value");
-        CompletableFuture<Simple> simpleCf = new CompletableFuture();
+//        CompletableFuture<Simple> simpleCf = new CompletableFuture();
         Arrays.stream(CompletableFuture.class.getDeclaredFields()).forEach((field -> System.out.println(field.getName())));
     }
 }
