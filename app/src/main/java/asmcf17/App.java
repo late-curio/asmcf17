@@ -3,15 +3,11 @@
  */
 package asmcf17;
 
-import org.objectweb.asm.ClassReader;
-
 import java.io.IOException;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        ClassPrinter printer = new ClassPrinter();
-        ClassReader reader = new ClassReader("asmcf17.Simple");
-        reader.accept(printer, 0);
+        System.out.println("MAIN");
     }
 }
 

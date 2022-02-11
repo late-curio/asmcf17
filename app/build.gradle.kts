@@ -37,3 +37,10 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+val jar by tasks.getting(Jar::class) {
+    manifest {
+        attributes["Main-Class"] = "asmcf17.App"
+        attributes["Premain-Class"] = "asmcf17.Agent"
+    }
+}
