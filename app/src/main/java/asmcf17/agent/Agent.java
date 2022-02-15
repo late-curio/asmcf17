@@ -11,25 +11,17 @@ import java.lang.instrument.Instrumentation;
 
 import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
 
+
+
 public class Agent {
+    private static final String CLASS_DEF = "asmcf17/app/Simple";
+
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         System.out.println("PREMAIN");
         instrumentation.addTransformer((loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> {
-            //if (className.equals("java/util/concurrent/CompletableFuture")) {
-            if(className.equals("asmcf17/app/Simple")) {
+            if(className.equals(CLASS_DEF)) {
                 System.out.println(className);
-//                ClassPrinter printer = new ClassPrinter();
-//                ClassReader reader = null;
-//                try {
-//                    reader = new ClassReader("asmcf17.app.Simple");
-//                    //reader = new ClassReader("java.util.concurrent.CompletableFuture");
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                reader.accept(printer, 0);
-
-                //InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("java/util/concurrent/CompletableFuture.class");
-                InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("asmcf17/app/Simple.class");
+                InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(CLASS_DEF + ".class");
                 if(is == null) {
                     return classfileBuffer;
                 }
@@ -42,7 +34,6 @@ public class Agent {
                 }
                 ClassWriter cw = new ClassWriter(0);
                 //ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
-                //ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(cw, "Lasmcf17/agent/InstrumentedClass;");
                 ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(cw, "Lasmcf17/agent/InstrumentedClass;");
                 ClassReader cr = new ClassReader(b1);
                 cr.accept(addAnnotationAdapter, 0);
