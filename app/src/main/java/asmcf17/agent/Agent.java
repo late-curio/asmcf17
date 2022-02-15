@@ -30,17 +30,17 @@ public class Agent {
                 byte[] b1 = new byte[0];
                 try {
                     b1 = ByteStreams.toByteArray(is);
-                    System.out.println(b1.length);
+                    System.out.println("BEFORE:" + b1.length);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 ClassWriter cw = new ClassWriter(0);
                 ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
-                ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(addFieldAdapter, "Lasmcf17/agent/InstrumentedClass;");
+                //ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(addFieldAdapter, "Lasmcf17/agent/InstrumentedClass;");
                 ClassReader cr = new ClassReader(b1);
-                cr.accept(addAnnotationAdapter, 0);
+                cr.accept(addFieldAdapter, 0);
                 byte[] b2 = cw.toByteArray();
-                System.out.println(b2.length);
+                System.out.println("AFTER: " + b2.length);
                 return b2;
             }
             return classfileBuffer;
