@@ -5,22 +5,21 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
 
-import static org.objectweb.asm.Opcodes.ASM4;
-import static org.objectweb.asm.Opcodes.V1_5;
+import static org.objectweb.asm.Opcodes.*;
 
 public class AddAnnotationAdapter extends ClassVisitor {
     private final String annotationDesc;
     private boolean isAnnotationPresent;
 
     public AddAnnotationAdapter(ClassVisitor cv, String annotationDesc) {
-        super(ASM4, cv);
+        super(ASM9, cv);
         this.annotationDesc = annotationDesc;
     }
 
     @Override
     public void visit(int version, int access, String name,
                       String signature, String superName, String[] interfaces) {
-        int v = (version & 0xFF) < V1_5 ? V1_5 : version;
+        int v = (version & 0xFF) < V17 ? V17 : version;
         cv.visit(v, access, name, signature, superName, interfaces);
     }
 

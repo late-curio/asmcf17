@@ -5,6 +5,7 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
 
 import static org.objectweb.asm.Opcodes.ASM4;
+import static org.objectweb.asm.Opcodes.ASM9;
 
 public class AddFieldAdapter extends ClassVisitor {
     private final int fAcc;
@@ -13,7 +14,7 @@ public class AddFieldAdapter extends ClassVisitor {
     private boolean isFieldPresent;
 
     public AddFieldAdapter(ClassVisitor classVisitor, int fAcc, String fName, String fDesc) {
-        super(ASM4, classVisitor);
+        super(ASM9, classVisitor);
         this.fAcc = fAcc;
         this.fName = fName;
         this.fDesc = fDesc;
