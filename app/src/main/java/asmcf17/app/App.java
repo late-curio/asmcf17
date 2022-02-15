@@ -23,7 +23,7 @@ public class App {
 //        Arrays.stream(CompletableFuture.class.getDeclaredFields()).forEach((field -> System.out.println(field.getName())));
 //    }
 
-    private static Class klass = Simple.class;
+    private static Class klass = CompletableFuture.class;
 
     public static void main(String... args) throws Throwable {
 
@@ -43,8 +43,8 @@ public class App {
         System.out.println("--- Interfaces ---");
         Arrays.stream(klass.getAnnotations()).forEach((it) -> System.out.println(it.toString()));
 
-//    System.out.println("--- Fields ---");
-//    Arrays.stream(CompletableFuture.class.getDeclaredFields()).forEach((it) -> System.out.println(it.getName()) );
+        System.out.println("--- Fields ---");
+        Arrays.stream(klass.getDeclaredFields()).forEach((it) -> System.out.println(it.getName()) );
     }
 
     private static MethodHandles.Lookup privateLookupIn(Class clazz) throws IllegalAccessException, NoSuchFieldException, InvocationTargetException {

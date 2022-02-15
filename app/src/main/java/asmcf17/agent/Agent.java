@@ -14,7 +14,8 @@ import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
 
 
 public class Agent {
-    private static final String CLASS_DEF = "asmcf17/app/Simple";
+    //private static final String CLASS_DEF = "asmcf17/app/Simple";
+    private static final String CLASS_DEF = "java/util/concurrent/CompletableFuture";
 
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         System.out.println("PREMAIN");
@@ -33,8 +34,8 @@ public class Agent {
                     e.printStackTrace();
                 }
                 ClassWriter cw = new ClassWriter(0);
-                //ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
-                ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(cw, "Lasmcf17/agent/InstrumentedClass;");
+                ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
+                ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(addFieldAdapter, "Lasmcf17/agent/InstrumentedClass;");
                 ClassReader cr = new ClassReader(b1);
                 cr.accept(addAnnotationAdapter, 0);
                 byte[] b2 = cw.toByteArray();
