@@ -19,7 +19,7 @@ public class AddAnnotationAdapter extends ClassVisitor {
     @Override
     public void visit(int version, int access, String name,
                       String signature, String superName, String[] interfaces) {
-        int v = (version & 0xFF) < V17 ? V17 : version;
+        int v = (version & 0xFF) < V1_8 ? V1_8 : version;
         cv.visit(v, access, name, signature, superName, interfaces);
     }
 

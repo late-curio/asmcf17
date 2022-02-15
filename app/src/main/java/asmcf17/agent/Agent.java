@@ -5,9 +5,12 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.instrument.Instrumentation;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
 
@@ -35,15 +38,21 @@ public class Agent {
                     e.printStackTrace();
                 }
                 ClassWriter cw = new ClassWriter(0);
-                ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
-                ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(addFieldAdapter, "Lasmcf17/agent/InstrumentedClass;");
+                //ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
+                ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(cw, "Lasmcf17/agent/InstrumentedClass;");
                 ClassReader cr = new ClassReader(b1);
                 try {
-                    cr.accept(addFieldAdapter, 0);
+                    cr.accept(addAnnotationAdapter, 0);
                 } catch (Exception e) {
                     e.printStackTrace(System.err);
                 }
                 byte[] b2 = cw.toByteArray();
+                try {
+                    Files.write(Paths.get("/Users/tcrone/temp/Modified.class"), b2);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 System.out.println("AFTER: " + b2.length);
                 return b2;
             }
