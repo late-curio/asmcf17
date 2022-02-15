@@ -24,7 +24,7 @@ public class App {
 //    }
 public static void main(String... args) throws Throwable {
 
-    MethodHandles.Lookup lookup = MethodHandles.lookup();
+    //MethodHandles.Lookup lookup = MethodHandles.lookup();
     MethodHandles.Lookup classLookup = privateLookupIn(Class.class);
     MethodHandle getGenericSignature0 = classLookup.findVirtual(Class.class, "getGenericSignature0", MethodType.methodType(String.class));
     Object genericSignature = getGenericSignature0.invoke(CompletableFuture.class);
@@ -36,6 +36,12 @@ public static void main(String... args) throws Throwable {
 
     Type type = App.class.getDeclaredMethod("testing").getGenericReturnType();
     System.out.println("TYPE: " + type);
+
+    System.out.println("--- Interfaces ---");
+    Arrays.stream(Simple.class.getAnnotations()).forEach((it) -> System.out.println(it.toString()) );
+
+//    System.out.println("--- Fields ---");
+//    Arrays.stream(CompletableFuture.class.getDeclaredFields()).forEach((it) -> System.out.println(it.getName()) );
 }
 
     public CompletableFuture<List<String>> testing() {
@@ -50,6 +56,8 @@ public static void main(String... args) throws Throwable {
             // we need to access it via reflection. This is preferred way because it's Java 9+ public api and is
             // likely to not change
             final Method privateLookupIn = MethodHandles.class.getMethod("privateLookupIn", Class.class, MethodHandles.Lookup.class);
+
+
             return (MethodHandles.Lookup) privateLookupIn.invoke(null, clazz, MethodHandles.lookup());
         }
         catch (NoSuchMethodException e)

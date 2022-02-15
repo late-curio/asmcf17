@@ -15,8 +15,8 @@ public class Agent {
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         System.out.println("PREMAIN");
         instrumentation.addTransformer((loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> {
-            //System.out.println(className);
             if (className.equals("java/util/concurrent/CompletableFuture")) {
+                System.out.println(className);
                 ClassPrinter printer = new ClassPrinter();
                 ClassReader reader = null;
                 try {
@@ -38,9 +38,10 @@ public class Agent {
                     e.printStackTrace();
                 }
                 ClassWriter cw = new ClassWriter(0);
-                ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
+                //ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
+                ClassVisitor addAnnotationAdapter = new AddAnnotationAdapter(cw, "Lasmcf17/agent/InstrumentedClass;");
                 ClassReader cr = new ClassReader(b1);
-                cr.accept(addFieldAdapter, 0);
+                cr.accept(addAnnotationAdapter, 0);
                 return cw.toByteArray();
             }
             return classfileBuffer;

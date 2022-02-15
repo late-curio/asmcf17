@@ -1,5 +1,6 @@
 package asmcf17.app;
 
+@Deprecated
 public class Simple {
     private String field;
 
