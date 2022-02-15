@@ -1,6 +1,8 @@
 package asmcf17.app;
 
-@Deprecated
+import asmcf17.agent.InstrumentedClass;
+
+//@InstrumentedClass
 public class Simple {
     private String field;
 
