@@ -23,10 +23,10 @@ public class App {
 //        Arrays.stream(CompletableFuture.class.getDeclaredFields()).forEach((field -> System.out.println(field.getName())));
 //    }
 
-    private static Class klass = CompletableFuture.class;
+    //private static Class klass = Simple.class;
 
     public static void main(String... args) throws Throwable {
-
+        Class klass = Class.forName(args[0]);
         //MethodHandles.Lookup lookup = MethodHandles.lookup();
         MethodHandles.Lookup classLookup = privateLookupIn(Class.class);
         MethodHandle getGenericSignature0 = classLookup.findVirtual(Class.class, "getGenericSignature0", MethodType.methodType(String.class));

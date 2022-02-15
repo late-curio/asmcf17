@@ -15,14 +15,15 @@ import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
 
 public class Agent {
     //private static final String CLASS_DEF = "asmcf17/app/Simple";
-    private static final String CLASS_DEF = "java/util/concurrent/CompletableFuture";
+    //private static final String CLASS_DEF = "java/util/concurrent/CompletableFuture";
 
     public static void premain(String agentArgs, Instrumentation instrumentation) {
         System.out.println("PREMAIN");
+        System.out.println(agentArgs);
         instrumentation.addTransformer((loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> {
-            if(className.equals(CLASS_DEF)) {
+            if(className.equals(agentArgs)) {
                 System.out.println(className);
-                InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(CLASS_DEF + ".class");
+                InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(agentArgs + ".class");
                 if(is == null) {
                     return classfileBuffer;
                 }
