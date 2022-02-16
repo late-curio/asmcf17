@@ -3,10 +3,13 @@
  */
 package asmcf17.app;
 
+import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -25,17 +28,17 @@ public class App {
     public static void main(String... args) throws Throwable {
         Class<?> klass = Class.forName(args[0]);
         //MethodHandles.Lookup lookup = MethodHandles.lookup();
-//        MethodHandles.Lookup classLookup = privateLookupIn(Class.class);
-//        MethodHandle getGenericSignature0 = classLookup.findVirtual(Class.class, "getGenericSignature0", MethodType.methodType(String.class));
-//        Object genericSignature = getGenericSignature0.invoke(CompletableFuture.class);
-//
-//        System.out.println();
-//        System.out.println("getGenericSignature0: " + genericSignature);
-//        System.out.println("expected: <T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/concurrent/Future<TT;>;Ljava/util/concurrent/CompletionStage<TT;>;");
-//        System.out.println();
-//
-//        Type type = App.class.getDeclaredMethod("testing").getGenericReturnType();
-//        System.out.println("TYPE: " + type);
+        MethodHandles.Lookup classLookup = privateLookupIn(Class.class);
+        MethodHandle getGenericSignature0 = classLookup.findVirtual(Class.class, "getGenericSignature0", MethodType.methodType(String.class));
+        Object genericSignature = getGenericSignature0.invoke(CompletableFuture.class);
+
+        System.out.println();
+        System.out.println("getGenericSignature0: " + genericSignature);
+        System.out.println("expected: <T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/concurrent/Future<TT;>;Ljava/util/concurrent/CompletionStage<TT;>;");
+        System.out.println();
+
+        Type type = App.class.getDeclaredMethod("testing").getGenericReturnType();
+        System.out.println("TYPE: " + type);
 
         System.out.println("--- Interfaces ---");
         Arrays.stream(klass.getAnnotations()).forEach((it) -> System.out.println(it.toString()));

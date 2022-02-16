@@ -69,8 +69,5 @@ public class AddAnnotationAdapter extends ClassVisitor {
             }
             isAnnotationPresent = true;
         }
-        else {
-            System.out.println("Already Present");
-        }
     }
 }
