@@ -3,6 +3,9 @@
  */
 package asmcf17.app;
 
+import com.google.common.io.ByteStreams;
+
+import java.io.InputStream;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -41,6 +44,13 @@ public class App {
 
         Type type = App.class.getDeclaredMethod("testing").getGenericReturnType();
         System.out.println("TYPE: " + type);
+
+        String name = klass.getCanonicalName().replace(".", "/") + ".class";
+        System.out.println(name);
+        InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream(name);
+        byte[] bytes = ByteStreams.toByteArray(inputStream);
+
+        System.out.println("AFTER AFTER:" + bytes.length);
 
         System.out.println("--- Annotations ---");
         Arrays.stream(klass.getDeclaredAnnotations()).forEach((it) -> System.out.println(it.toString()));
