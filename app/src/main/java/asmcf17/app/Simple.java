@@ -1,13 +1,13 @@
 package asmcf17.app;
 
-public class Simple {
-    private String field;
+public class Simple<T> {
+    private T field;
 
-    public String getField() {
+    public T getField() {
         return field;
     }
 
-    public void setField(String value) {
+    public void setField(T value) {
         this.field = value;
     }
 }
