@@ -24,6 +24,7 @@ public class Agent {
         System.out.println("PREMAIN");
         System.out.println(agentArgs);
         instrumentation.addTransformer((loader, className, classBeingRedefined, protectionDomain, classfileBuffer) -> {
+            //System.out.println("Checking..." + className);
             if(className.equals(agentArgs)) {
                 System.out.println(className);
                 InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(agentArgs + ".class");
@@ -34,6 +35,7 @@ public class Agent {
                 try {
                     b1 = ByteStreams.toByteArray(is);
                     System.out.println("BEFORE:" + b1.length);
+                    Files.write(Paths.get("/Users/tcrone/temp/Original.class"), b1);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -60,6 +62,4 @@ public class Agent {
             return classfileBuffer;
         });
     }
-
-
 }

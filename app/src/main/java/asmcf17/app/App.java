@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -26,6 +27,7 @@ public class App {
     //private static Class klass = Simple.class;
 
     public static void main(String... args) throws Throwable {
+        List<String> list = new ArrayList();
         Class<?> klass = Class.forName(args[0]);
         //MethodHandles.Lookup lookup = MethodHandles.lookup();
         MethodHandles.Lookup classLookup = privateLookupIn(Class.class);
@@ -40,8 +42,8 @@ public class App {
         Type type = App.class.getDeclaredMethod("testing").getGenericReturnType();
         System.out.println("TYPE: " + type);
 
-        System.out.println("--- Interfaces ---");
-        Arrays.stream(klass.getAnnotations()).forEach((it) -> System.out.println(it.toString()));
+        System.out.println("--- Annotations ---");
+        Arrays.stream(klass.getDeclaredAnnotations()).forEach((it) -> System.out.println(it.toString()));
 
         System.out.println("--- Fields ---");
         Arrays.stream(klass.getDeclaredFields()).forEach((it) -> System.out.println(it.getName()) );
