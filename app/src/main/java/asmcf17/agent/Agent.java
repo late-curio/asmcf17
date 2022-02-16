@@ -38,12 +38,12 @@ public class Agent {
                     e.printStackTrace();
                 }
                 ClassWriter cw = new ClassWriter(0);
-                //ClassVisitor addFieldAdapter = new AddFieldAdapter(cw, ACC_PUBLIC, "aNewBooleanField", "");
                 ClassVisitor addWeaveAnnotationAdapter = new AddAnnotationAdapter(cw, "Lasmcf17/agent/Weave;");
                 ClassVisitor addInstrumentedClassAnnotationAdapter = new AddAnnotationAdapter(addWeaveAnnotationAdapter, "Lasmcf17/agent/InstrumentedClass;");
+                ClassVisitor addFieldAdapter = new AddFieldAdapter(addInstrumentedClassAnnotationAdapter, ACC_PUBLIC, "aNewBooleanField", "");
                 ClassReader cr = new ClassReader(b1);
                 try {
-                    cr.accept(addInstrumentedClassAnnotationAdapter, 0);
+                    cr.accept(addFieldAdapter, 0);
                 } catch (Exception e) {
                     e.printStackTrace(System.err);
                 }

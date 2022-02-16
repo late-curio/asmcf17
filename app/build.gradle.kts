@@ -43,9 +43,13 @@ tasks {
     shadowJar {
         manifest {
             attributes(
-                Pair("Premain-Class", "asmcf17.agent.Agent")
+                Pair("Premain-Class", "asmcf17.agent.Agent"),
+                Pair("Can-Retransform-Classes", true),
+                Pair("Can-Redefine-Classes", true),
+                Pair("Agent-Class", "asmcf17.agent.Agent")
             )
         }
     }
 }
+
 
